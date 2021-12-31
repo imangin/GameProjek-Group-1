@@ -4,21 +4,11 @@ using UnityEngine;
 
 public class camerafollow : MonoBehaviour
 {
-	private Transform Player;
-    private float minX = 0, maxX = 0;
-    private void Start()
+    public float FollowSpeed = 2f;
+	public Transform target;
+    void Update()
     {
-        Player = GameObject.FindWithTag("Player").transform;
-    }
-    private void Update()
-    {
-        if (Player != null)
-        {
-            Vector3 vitri = transform.position;
-            vitri.x = Player.position.x;
-            if (vitri.x < minX) vitri.x = 0;
-            if (vitri.x < maxX) vitri.x = maxX;
-            transform.position = vitri;
-        }
+        Vector3 newPos = new Vector3(target.position.x, target.position.y , -10f);
+        transform.position = Vector3.Slerp(transform.position, newPos, FollowSpeed * Time.deltaTime);
     }
 }

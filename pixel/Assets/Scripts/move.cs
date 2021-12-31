@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class move : MonoBehaviour
 {
-    public float VanToc = 270f;
+    public float VanToc = 165f;
     public int AnimState;
     private bool Grounded = true;
     private bool QuayPhai =true;
     private bool canAttack;
+    private bool IdleBlock = false;
     public float NhayCao = 1800;
     private Rigidbody2D r2d;
     private int attackTime = 0;
@@ -28,11 +29,14 @@ public class move : MonoBehaviour
         HoatHoa.SetBool("Grounded", Grounded);
         NhayLen();
         Tancong();
+        Block();
+        HoatHoa.SetBool("IdleBlock", IdleBlock);
+
     }
     private void FixedUpdate()
     {
         DiChuyen();
-       
+        
     }
     void DiChuyen()
     {
@@ -78,7 +82,7 @@ public class move : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canAttack)
         {
             canAttack = false;
-            Debug.Log(attackTime++);
+            attackTime++;
             StartCoroutine(attackDelay());
             if (attackTime == 1)
             {
@@ -97,12 +101,29 @@ public class move : MonoBehaviour
            
         }
     }
+    void Block()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            HoatHoa.SetTrigger("Block");
+            if (Input.GetKey(KeyCode.F))
+            {
+                IdleBlock = true;
+                VanToc = 0;
+            }         
+        }
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            IdleBlock = false;
+            VanToc = 165f;
+        }
+    }
     IEnumerator attackDelay() // thoi gian delay giua moi lan tan cong
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         canAttack = true;
     }
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other) //xu ly va cham voi mat dat
     {
         if (other.gameObject.tag == "ground")
         {
