@@ -7,7 +7,6 @@ public class AIpatrol : MonoBehaviour
     [HideInInspector]
     public bool mustPatrol;
 
-    public int Walkspeed = 70;
     private int Walk;
     private bool mustTurn;
     private bool Grounded;
@@ -16,8 +15,9 @@ public class AIpatrol : MonoBehaviour
     public LayerMask groundlayer;
     public Collider2D bodyCollider;
     public GameObject obj;
-    public float distance = 0; //pham vi cho phep quai di chuyen
     private Animator HoatHoa;
+    public int Walkspeed = 70;
+    public float distance = 0; //pham vi cho phep quai di chuyen
     
     // Start is called before the first frame update
     void Start()
