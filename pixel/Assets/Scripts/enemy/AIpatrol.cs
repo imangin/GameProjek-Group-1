@@ -10,12 +10,12 @@ public class AIpatrol : MonoBehaviour
     private int Walk;
     private bool mustTurn;
     private bool Grounded;
+    private Animator HoatHoa;
     public Rigidbody2D r2d;
     public Transform GrounCheckPos;
     public LayerMask groundlayer;
     public Collider2D bodyCollider;
     public GameObject obj;
-    private Animator HoatHoa;
     public int Walkspeed = 70;
     public float distance = 0; //pham vi cho phep quai di chuyen
     

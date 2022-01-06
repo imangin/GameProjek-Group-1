@@ -6,14 +6,16 @@ public class move : MonoBehaviour
 {
     public float VanToc ;
     public int AnimState;
+    public float NhayCao = 1800;
     private bool Grounded = true;
     private bool QuayPhai =true;
     private bool canAttack;
     private bool IdleBlock = false;
-    public float NhayCao = 1800;
     private Rigidbody2D r2d;
     private int attackTime = 0;
     private Animator HoatHoa;
+    public Vector3 respawnPoint;
+    public Transform groundCheckPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,7 @@ public class move : MonoBehaviour
         HoatHoa = GetComponent<Animator>();
         canAttack = true;
         VanToc = 165f;
+        respawnPoint = transform.position;
     }
 
     // Update is called once per frame
@@ -134,6 +137,17 @@ public class move : MonoBehaviour
         if (other.gameObject.tag == "ground")
         {
             Grounded = true;
+        }
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "FallDetector")
+        {
+            transform.position = respawnPoint;
+        }
+        if (other.tag == "Checkpoint")
+        {
+            respawnPoint = other.transform.position;
         }
     }
 }
