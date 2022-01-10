@@ -37,6 +37,7 @@ public class move : MonoBehaviour
         HoatHoa.SetBool("IdleBlock", IdleBlock);
 
     }
+   
     private void FixedUpdate()
     {
         DiChuyen();
@@ -150,4 +151,5 @@ public class move : MonoBehaviour
             respawnPoint = other.transform.position;
         }
     }
+   
 }

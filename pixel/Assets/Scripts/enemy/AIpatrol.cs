@@ -16,17 +16,20 @@ public class AIpatrol : MonoBehaviour
     public LayerMask groundlayer;
     public Collider2D bodyCollider;
     public GameObject obj;
+    
     public int Walkspeed = 70;
     public float distance = 0; //pham vi cho phep quai di chuyen
     
     // Start is called before the first frame update
     void Start()
     {
+        obj = gameObject;
         mustPatrol = true;
         distance += obj.transform.position.x;
         Grounded = true;
         Walk = Mathf.RoundToInt( Walkspeed * Time.deltaTime);
         HoatHoa = GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -54,6 +57,9 @@ public class AIpatrol : MonoBehaviour
         if (mustTurn || bodyCollider.IsTouchingLayers(groundlayer) || obj.transform.position.x >= distance) 
         {
             Flip();
+            obj.GetComponent<EnemyBehaviour>().StopAttack();
+            Debug.Log("Stop");
+
         }
         r2d.velocity = new Vector2(Walkspeed * Time.fixedDeltaTime, r2d.velocity.y);
         Walk = Mathf.RoundToInt(Walkspeed * Time.deltaTime);

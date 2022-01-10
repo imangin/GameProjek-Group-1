@@ -8,10 +8,12 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask enemyLayer;
     public float attackrange = 0.5f;
     public int attackDamage;
+    
     // Start is called before the first frame update
     void Start()
     {
         attackDamage = 1;
+        
     }
 
     // Update is called once per frame
@@ -28,9 +30,9 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackrange, enemyLayer);
 
         //gay sat thuong len ke thu
-        foreach (Collider2D enemy in hitEnemies)
+        foreach (Collider2D Enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyGetDamged>().TakeDamge(attackDamage);
+            Enemy.GetComponent<EnemyGetDamged>().TakeDamge(attackDamage);
             
         }
     }
