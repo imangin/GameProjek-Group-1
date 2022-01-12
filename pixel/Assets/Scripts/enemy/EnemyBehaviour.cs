@@ -22,7 +22,7 @@ public class EnemyBehaviour : MonoBehaviour
     private bool inRange;
     private bool cooling;
     private float intTimer;
-
+    private bool canAttack;
 
     private void Awake()
     {
@@ -30,6 +30,7 @@ public class EnemyBehaviour : MonoBehaviour
         intTimer = timer;
         anim = GetComponent<Animator>();
         anim.SetBool("canWalk", true);
+       
     }
     void Update()
     {
@@ -71,14 +72,14 @@ public class EnemyBehaviour : MonoBehaviour
             
             StopAttack();
         }
-        else if(attackDistance > distance && cooling == false)
+        else if(attackDistance > distance)
         {
             Attack();
         }
         if (cooling)
         {
             Cooldow();
-            
+
             anim.SetBool("Attack 1", false);
         }
     }
@@ -96,15 +97,15 @@ public class EnemyBehaviour : MonoBehaviour
         timer = intTimer;
         attackMode = true;
         anim.SetBool("canWalk", false);
-        anim.SetBool("Attack 1" , true);
-        
+        anim.SetBool("Attack 1", true);     
     }
     void Cooldow()
     {
-        Debug.Log("cooldow");
+        
         timer -= Time.deltaTime;
         if (timer <= 0 && cooling && attackMode)
         {
+            Debug.Log("cooldow");
             cooling = false;
             timer = intTimer;
         }
@@ -115,7 +116,7 @@ public class EnemyBehaviour : MonoBehaviour
         anim.SetBool("Attack 1", false);
         cooling = false;
     }
-    private void OnTriggerEnter2D(Collider2D trig)
+     void OnTriggerEnter2D(Collider2D trig)
     {
         if(trig.gameObject.tag == "Player")
         {
@@ -139,11 +140,12 @@ public class EnemyBehaviour : MonoBehaviour
     {
         cooling =  true;
     }
-    private bool InsideofLimit()
+   
+    public bool InsideofLimit()
     {
         return transform.position.x > LeftLimit.position.x && transform.position.x < RightLimit.position.x;
     }
-    private void SelectTarget()
+    void SelectTarget()
     {
         float distanceToLeft = Vector2.Distance(transform.position, LeftLimit.position);
         float distanceToRight = Vector2.Distance(transform.position, RightLimit.position);
@@ -158,7 +160,7 @@ public class EnemyBehaviour : MonoBehaviour
         Flip();
 
     }
-    private void Flip()
+    public void Flip()
     {
         Vector3 rotation = transform.eulerAngles;
         if (transform.position.x > target.position.x)

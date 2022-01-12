@@ -6,7 +6,7 @@ public class move : MonoBehaviour
 {
     public float VanToc ;
     public int AnimState;
-    public float NhayCao = 1800;
+    public float NhayCao = 1800f;
     private bool Grounded = true;
     private bool QuayPhai =true;
     private bool canAttack;

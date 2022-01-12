@@ -1,15 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class CoinsScript : MonoBehaviour { 
+public class CoinsScript : MonoBehaviour
 
-    void OnTriggerEnter2D (Collider2D col)
-    {
+{
+    private float coin = 0;
+    public TextMeshProUGUI textCoins;
+
+  
+private void OnTriggerEnter2D(Collider2D other)
+{
+        if (other.transform.tag == "coin")
+        {
+            coin ++;
+            textCoins.text = coin.ToString();
+            Destroy(other.gameObject);
         
-        
-        Destroy(gameObject);
-           
+        }
         
     }
 }

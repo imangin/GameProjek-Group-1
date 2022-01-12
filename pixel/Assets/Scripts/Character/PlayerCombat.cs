@@ -9,10 +9,11 @@ public class PlayerCombat : MonoBehaviour
     public float attackrange = 0.5f;
     public int attackDamage;
     
+
     // Start is called before the first frame update
     void Start()
     {
-        attackDamage = 1;
+        attackDamage = 3;
         
     }
 
@@ -23,6 +24,7 @@ public class PlayerCombat : MonoBehaviour
         {
             Attack();
         }
+        
     }
     void Attack()
     {
@@ -32,10 +34,12 @@ public class PlayerCombat : MonoBehaviour
         //gay sat thuong len ke thu
         foreach (Collider2D Enemy in hitEnemies)
         {
+            Debug.Log("me deal " + attackDamage);
             Enemy.GetComponent<EnemyGetDamged>().TakeDamge(attackDamage);
             
         }
     }
+    
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
