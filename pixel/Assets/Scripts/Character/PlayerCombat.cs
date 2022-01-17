@@ -13,7 +13,7 @@ public class PlayerCombat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        attackDamage = 3;
+        attackDamage = 10;
         
     }
 
@@ -23,8 +23,7 @@ public class PlayerCombat : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Attack();
-        }
-        
+        }    
     }
     void Attack()
     {
@@ -32,10 +31,10 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackrange, enemyLayer);
 
         //gay sat thuong len ke thu
-        foreach (Collider2D Enemy in hitEnemies)
+        foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("me deal " + attackDamage);
-            Enemy.GetComponent<EnemyGetDamged>().TakeDamge(attackDamage);
+            enemy.GetComponent<EnemyGetDamged>().TakeDamge(attackDamage);
             
         }
     }

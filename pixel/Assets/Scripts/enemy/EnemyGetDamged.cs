@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class EnemyGetDamged : MonoBehaviour
 {
-    public int EnemyMaxHeatlh = 6;
+    public int EnemyMaxHeatlh;
     int CurrentHeatlh;
     private Animator anim;
     public GameObject hitbox;
     public GameObject Triggerarea;
+    
     // Start is called before the first frame update
     void Start()
     {
+      
         CurrentHeatlh = EnemyMaxHeatlh;
         anim = GetComponent<Animator>();
         Triggerarea = GameObject.FindGameObjectWithTag("triggerarea");
@@ -35,8 +37,9 @@ public class EnemyGetDamged : MonoBehaviour
     void Die()
     {
         GetComponent<EnemyBehaviour>().StopAttack();
-        anim.SetBool("Dead", true); 
-        GetComponent<BoxCollider2D>().enabled = false;
+        
+        anim.SetBool("Dead", true);
+        
         GetComponent<CircleCollider2D>().enabled = false;
         GetComponent<EnemyBehaviour>().enabled = false;
         GetComponent<EnemyGetDamged>().enabled = false;
